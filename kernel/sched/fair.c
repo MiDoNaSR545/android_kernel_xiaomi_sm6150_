@@ -5921,7 +5921,7 @@ cpu_is_in_target_set(struct task_struct *p, int cpu)
 		first_cpu = rd->min_cap_orig_cpu;
 	}
 
-	next_usable_cpu = cpumask_next(first_cpu - 1, &p->cpus_allowed);
+	next_usable_cpu = cpumask_next(first_cpu - 1, p->cpus_ptr);
 	return cpu >= next_usable_cpu || next_usable_cpu >= nr_cpu_ids;
 }
 
@@ -8494,7 +8494,7 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int sd_flag, int wake_f
 
 	if (sd_flag & SD_BALANCE_WAKE) {
 		int _wake_cap = wake_cap(p, cpu, prev_cpu);
-		int _cpus_allowed = cpumask_test_cpu(cpu, &p->cpus_allowed);
+		int _cpus_allowed = cpumask_test_cpu(cpu, p->cpus_ptr);
 
 		if (sysctl_sched_sync_hint_enable && sync &&
 				_cpus_allowed && !_wake_cap &&
