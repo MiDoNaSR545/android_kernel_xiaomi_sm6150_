@@ -3171,6 +3171,9 @@ static int smblib_therm_charging(struct smb_charger *chg)
 	} else {
 		pr_debug("thermal_icl_ua is %d, chg->system_temp_level: %d\n",
 				thermal_icl_ua, chg->system_temp_level);
+		#if 0
+
+
 		pr_debug("thermal_fcc_ua is %d\n", thermal_fcc_ua);
 
 		if (chg->real_charger_type == POWER_SUPPLY_TYPE_USB_HVDCP_3
