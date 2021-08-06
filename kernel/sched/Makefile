@@ -36,3 +36,7 @@ ifndef CONFIG_SCHED_CORE_CTL
 obj-$(CONFIG_SCHED_WALT) += rotation_ctl.o
 endif
 obj-$(CONFIG_PSI) += psi.o
+
+ifneq ($(CONFIG_SCHED_WALT),y)
+obj-y += boost_pelt.o
+endif
