@@ -111,8 +111,9 @@ static atomic_t shift_adj = ATOMIC_INIT(0);
 static short adj_max_shift = 353;
 
 /* User knob to enable/disable adaptive lmk feature */
-static int enable_adaptive_lmk;
-module_param_named(enable_adaptive_lmk, enable_adaptive_lmk, int, 0644);
+static int enable_adaptive_lmk = 0;
+/* Kill adaptive LMK sys param, so init script can't enable it */
+/* module_param_named(enable_adaptive_lmk, enable_adaptive_lmk, int, 0644); */
 
 /*
  * This parameter controls the behaviour of LMK when vmpressure is in
