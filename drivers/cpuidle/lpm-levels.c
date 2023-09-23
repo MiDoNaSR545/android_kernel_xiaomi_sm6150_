@@ -150,7 +150,8 @@ static int cpu_power_select(struct cpuidle_device *dev,
 	uint32_t max_residency;
 	struct power_params *pwr_params;
 
-	if ((sleep_disabled && !cpu_isolated(dev->cpu)) || sleep_us < 0)
+	if ((sleep_disabled && !cpu_isolated(dev->cpu)) ||
+	    is_reserved(dev->cpu) || sleep_us < 0)
 		return best_level;
 
 	idx_restrict = cpu->nlevels + 1;
