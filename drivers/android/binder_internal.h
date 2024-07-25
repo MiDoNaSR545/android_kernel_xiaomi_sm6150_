@@ -412,8 +412,6 @@ struct binder_priority {
  * @freeze_wait:          waitqueue of processes waiting for all outstanding
  *                        transactions to be processed
  *                        (protected by @inner_lock)
- * @dmap                  dbitmap to manage available reference descriptors
- *                        (protected by @outer_lock)
  * @todo:                 list of work for this process
  *                        (protected by @inner_lock)
  * @stats:                per-process binder statistics
@@ -462,7 +460,6 @@ struct binder_proc {
 	bool sync_recv;
 	bool async_recv;
 	wait_queue_head_t freeze_wait;
-	struct dbitmap dmap;
 	struct list_head todo;
 #ifdef CONFIG_ANDROID_BINDER_LOGS
 	struct binder_stats stats;
@@ -489,15 +486,20 @@ struct binder_proc {
  *                        in binder_open()
  *                        (invariant after initialized)
  * @lock:            protects binder_proc->alloc fields
+ * @dmap             dbitmap to manage available reference descriptors
+ *                   (protected by @proc.outer_lock)
  *
  * Extended binder_proc -- needed to add the "cred" field without
  * changing the KMI for binder_proc.
  * Extended binder_proc -- needed to add the "lock" field without
  * changing the KMI for binder_proc->alloc.
+ * Extended binder_proc -- needed to add the "dmap" field without
+ * changing the KMI for binder_proc.
  */
 struct binder_proc_ext {
 	struct binder_proc proc;
 	const struct cred *cred;
+	struct dbitmap dmap;
 	spinlock_t lock;
 };
 
