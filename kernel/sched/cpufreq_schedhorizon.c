@@ -32,8 +32,8 @@ static unsigned int default_efficient_freq_lp[] = {1708800};
 static unsigned int default_efficient_freq_perf[] = {1324800};
 
 /* Define default up delays for big and LITTLE cores */
-static unsigned int default_up_delay_lp[] = {100};
-static unsigned int default_up_delay_perf[] = {100};
+static unsigned int default_up_delay_lp[] = {60};
+static unsigned int default_up_delay_perf[] = {90};
 
 struct sugov_tunables {
 	struct gov_attr_set attr_set;
